@@ -1,22 +1,22 @@
 {% extends "base.html" %}
 
 {% block content %}
-  {% block item %}
-    <div class="card" style="width: 18rem;">
-      <img src= "{{item.img}}" class="card-img-top" alt="...">
-      <div class="card-body">
+
+<div class="card" style="width: 18rem;">
+    <img src="..." class="card-img-top" alt="...">
+    <div class="card-body">
         <h5 class="card-title">Item {{ item.id }} </h5>
         <p class="card-text">Description: {{ item.description }}</p>
-      </div>
-      <ul class="list-group list-group-flush">
+    </div>
+    <ul class="list-group list-group-flush">
         <li class="list-group-item">Price: {{ item.price }} </li>
         <li class="list-group-item">Location: {{ item.city }} , {{ item.state }}</li>
         <li class="list-group-item">Contact: {{ item.contact }} </li>
-      </ul>
-      <div class="card-body">
+    </ul>
+    <div class="card-body">
         <a href="#" class="card-link">Card link</a>
         <a href="#" class="card-link">Another link</a>
-      </div>
     </div>
-  {% endblock %}
+</div>
+
 {% endblock %}

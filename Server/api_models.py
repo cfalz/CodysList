@@ -27,6 +27,8 @@ class ApiModel(object):
                                 "img":fields.String(description="Image URL", required=False),
                                 "description":fields.String(description="Description of the item", required=False),
                                 "ingredients":fields.List(fields.String(description="list of ingredients",required=False)),
+                                "state":fields.String(description="state where item resides", required=False),
+                                "city":fields.String(description="city where item resides", required=False),
                                 "lat":fields.Float(description="latitude", required=False),
                                 "lng":fields.Float(description="longitude",required=False)
                             })

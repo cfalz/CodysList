@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-2">
+            Additional Filters
+        </div>
+        <div class="col-sm-10">
+            {% for i in range(rows) %}
+            <div class="row">
+                <div class="card-deck">
+                    {% for item in items[i] %}
+                    <div class="card">
+                        <img src="{{item.img}}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Item {{ item.id }} </h5>
+                            <p class="card-text">Description: {{ item.description }}</p>
+                        </div>
+                        <div class="card-footer">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item h-25 font-weight-bold" style="font-size: 70%;">Location: {{
+                                    item.city }} , {{ item.state }}
+                                </li>
+                                <li class="list-group-item h-25 font-weight-bold" style="font-size: 70%;">Contact: {{
+                                    item.contact }}
+                                </li>
+                                <li class="list-group-item h-25 font-weight-bold" style="font-size: 95%;">Price: {{
+                                    item.price }}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    {% else %}
+                    <li> No Items Found.</li>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

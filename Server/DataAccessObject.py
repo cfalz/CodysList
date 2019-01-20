@@ -2,6 +2,8 @@ from __future__ import print_function
 import json
 import sys
 
+default_picture='../static/Images/picture-not-available.jpg'
+
 class Serializer(object):
 
     def _data_to_obj(self,obj, data):
@@ -17,16 +19,19 @@ class Serializer(object):
 
 class Item(Serializer):
 
-    def __init__(self,Accessor,item_id=None,description=None,ingredients=[],price=None,name=None,seller=None,lat=None,lng=None,img='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTH7FTp359RY_zPlTUYLiXXFHT9SUldCoqiMC_p2Byt3_I79obw'):
+    def __init__(self,Accessor,item_id=None,description=None,ingredients=[],price="$10.59",name=None,seller=None,state=None,city=None,lat=None,lng=None,img=default_picture, contact= "(123) 456-7891"):
         self.item_id = item_id
         self.description = description
         self.ingredients = ingredients
         self.price = price
         self.name = name
         self.seller = seller
+        self.state = state
+        self.city = city
         self.lat = lat
         self.lng = lng
         self.img = img
+        self.contact = contact
         self.accessor = Accessor
 
     def store(self):

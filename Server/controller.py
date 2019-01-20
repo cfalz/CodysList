@@ -16,7 +16,7 @@ apimodel = ApiModel(api)
 access = File()
 Dao = Dao(access)
 
-# Item Endpoint
+# Item Endpoints
 @api.route('/item')
 class Items(Resource):
     @api.response(200, 'Success', apimodel.item_format())
@@ -40,6 +40,13 @@ class Items(Resource):
             return Dao.get_item(item)
         except Exception as e:
             print("Failed POST to create and item with payload: ", api.payload, ", Threw exception :", e)
+
+@api.route('/items')
+class Items(Resource):
+    @api.response(200, 'Success', apimodel.item_list_response_format())
+    @api.response(500, 'Failure', apimodel.item_failure_response())
+    def get(self):
+        return Dao.get_items()
 
 if __name__ == '__main__':
     app.run(debug=True)

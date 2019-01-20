@@ -1,31 +1,28 @@
-import requests as requester
-import json
+from flask import Flask, render_template
+from flask_bootstrap import Bootstrap
+from Client.requester import Requester
 
-class Controller(object):
-    def __init__(self, request_client=requester, server_url='http://localhost:5000'):
-        self.request_client = request_client
-        self.server_url = server_url
+app = Flask(__name__)
+bootstrap = Bootstrap(app)
 
-    def get_item(self, item_id):
-        try:
-            return self.request_client.get(self.server_url + '/item?item_id=' + str(item_id)).json()
-        except Exception as e:
-            print("Exception in get_item", e)
-            return None
+client = Requester()
 
-    def post_item(self, payload, headers={'accept': 'application/json', 'Content-Type': 'application/json'}):
-        try:
-            print(self.server_url + '/item', headers, json.dumps(payload))
-            return self.request_client.post(self.server_url + '/item', headers = headers, data=json.dumps(payload)).json()
-        except Exception as e:
-            print("Exception in post_item", e)
-            return None
+@app.route('/')
+def index(items_url="http://localhost:5001/items"):
+    return render_template('index.html', items_url=items_url)
+
+@app.route('/items')
+def items():
+    items_list = client.get_items()
+    number_of_cols = 4
+    items_with_sublists = [items_list[i:i+number_of_cols] for i in range(0,len(items_list), number_of_cols)]
+    number_of_rows = len(items_with_sublists)
+    return render_template('all_items.html', items=items_with_sublists, rows=number_of_rows)
+
+@app.route('/item/<id>')
+def item(id):
+    return render_template('item.html', id=id)
+
 
 if __name__ == '__main__':
-    controller = Controller()
-    item_id = 14375
-    data = { "item_id": item_id, "seller": 0, "name": "item " + str(item_id), "price": 0, "img": "string", "description": "string", "ingredients": [ "string" ], "lat": 0, "lng": 0}
-    print("Attempting to create item with id ", data["item_id"], " in client controller")
-    print(controller.post_item(data))
-    print("Attempting to get item with id ", data["item_id"], " in client controller")
-    print(controller.get_item(data["item_id"]))
+    app.run(debug=True, port=5001)
