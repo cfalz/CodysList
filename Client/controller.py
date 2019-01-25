@@ -8,6 +8,8 @@ bootstrap = Bootstrap(app)
 
 client = Requester()
 
+server_url = 'http://localhost:5000/'
+
 @app.route('/')
 def index(items_url="http://localhost:5001/items"):
     return render_template('index.html', items_url=items_url)
@@ -29,8 +31,9 @@ def add_listing():
     data = {}
     form = AddListingForm()
     if form.validate_on_submit():
-        return redirect('/success')
-    return render_template('add_listing.html', form=form, data=data)
+        flash('Ceated Listing for {}'.format(form.title.data))
+        return redirect('/')
+    return render_template('add_listing.html', form=form, title='Add Listing')
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001)
