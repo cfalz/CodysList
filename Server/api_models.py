@@ -23,7 +23,7 @@ class ApiModel(object):
                                 "item_id":fields.Integer(description="id of the item"),
                                 "seller":fields.Integer(description="sellers id", required=True),
                                 "name":fields.String(description="Name of Item", required=True),
-                                "price":fields.Float(description="Price of Item", required=False),
+                                "price":fields.String(description="Price of Item", required=False),
                                 "img":fields.String(description="Image URL", required=False),
                                 "description":fields.String(description="Description of the item", required=False),
                                 "ingredients":fields.List(fields.String(description="list of ingredients",required=False)),

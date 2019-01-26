@@ -8,10 +8,9 @@
     <title>Base Template</title>
 </head>
 {% endblock %}
-{% block title %} CodysList {% endblock %}
 {% block navbar %}
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">CodysList</a>
+    <a class="navbar-brand" href="{{ url_for('index') }}">CodysList</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -19,13 +18,13 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="{{ url_for('index') }}">Home<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/listings">View Listings</a>
+                <a class="nav-link" href="{{ url_for('listings') }}">View Listings</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/add_listing">Add Listing</a>
+                <a class="nav-link" href="{{ url_for('add_listing') }}">Add Listing</a>
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
@@ -35,6 +34,17 @@
     </div>
 </nav>
 {% endblock %}
+<hr>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul>
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+{% block title %} CodysList {% endblock %}
 {% block content %}
 <h1> Featured Listings </h1>
 {% endblock %}
