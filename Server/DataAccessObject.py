@@ -125,7 +125,7 @@ class File(Accessor):
         with open(self.dir + str(obj).lower() +'.json', 'r') as f:
             existing_data = json.load(f)
 
-        existing_data.append(self._remove_accessor(obj.__dict__))
+        existing_data.insert(0,self._remove_accessor(obj.__dict__))
         # print("Existing Data After Appending", existing_data)
         #except ValueError:
         # print("[!] File.write() ERROR: Could not open {} for reading ".format(file.lower()+".json"))
