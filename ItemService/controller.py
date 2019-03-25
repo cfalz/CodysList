@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_restplus import Resource, Api, reqparse, fields
-from Server.DataAccessObject import *
-from Server.api_models import ApiModel
+from DataAccess.DataAccess import *
+from ItemService.api_models import ApiModel
 
 # Instantiate App
 app = Flask(__name__)
@@ -13,8 +13,7 @@ api = Api(app, version='1.0', title='CodysList')
 apimodel = ApiModel(api)
 
 # Instantiate Database (File)
-access = File()
-Dao = Dao(access)
+Dao = MongoDB()
 
 # Item Endpoints
 @api.route('/item')
@@ -28,25 +27,36 @@ class Items(Resource):
         parser.add_argument('item_id', type=int)
         args = parser.parse_args()
         print(args)
-        return Dao.get_item(args)
+        print(Dao.get(args))
+        return Dao.get(args)
 
     @api.expect(apimodel.item_format())
     @api.response(200, 'Success', apimodel.item_format())
     @api.response(500, 'Failure', apimodel.item_failure_response())
     def post(self):
         try:
-            Dao.create_item(api.payload)
-            item = {'item_id' : api.payload["item_id"]}
-            return Dao.get_item(item)
+            Dao.insert(api.payload)
         except Exception as e:
             print("Failed POST to create and item with payload: ", api.payload, ", Threw exception :", e)
+
+    @api.response(200, 'Success')
+    @api.response(500, 'Failure')
+    @api.doc(params={"item_id": "id of item to delete"})
+    def delete(self):
+        try:
+            parser = reqparse.RequestParser()
+            parser.add_argument('item_id', type=int)
+            args = parser.parse_args()
+            Dao.delete(args)
+        except Exception as e:
+            print("Failed Delete item with args ", args, ", Threw exception :", e)
 
 @api.route('/items')
 class Items(Resource):
     @api.response(200, 'Success', apimodel.item_list_response_format())
     @api.response(500, 'Failure', apimodel.item_failure_response())
     def get(self):
-        return Dao.get_items()
+        return Dao.get_all()
 
 if __name__ == '__main__':
     app.run(debug=True)

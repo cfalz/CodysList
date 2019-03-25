@@ -1,7 +1,7 @@
 from flask import Flask, render_template, flash, url_for, redirect
 from flask_bootstrap import Bootstrap
-from Client.requester import Requester
-from Client.static.Forms.AddListing import AddListingForm
+from ClientPython.requester import Requester
+from ClientPython.static.Forms.AddListing import AddListingForm
 from random import *
 from werkzeug.utils import secure_filename
 import json

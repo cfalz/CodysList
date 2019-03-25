@@ -17,7 +17,6 @@ class ApiModel(object):
                                     "user": fields.Nested(self.user_list_format())
                                         })
 
-
     def item_format(self):
         return self.api.model('Item Format',{
                                 "item_id":fields.Integer(description="id of the item"),
@@ -26,11 +25,8 @@ class ApiModel(object):
                                 "price":fields.String(description="Price of Item", required=False),
                                 "img":fields.String(description="Image URL", required=False),
                                 "description":fields.String(description="Description of the item", required=False),
-                                "ingredients":fields.List(fields.String(description="list of ingredients",required=False)),
                                 "state":fields.String(description="state where item resides", required=False),
                                 "city":fields.String(description="city where item resides", required=False),
-                                "lat":fields.Float(description="latitude", required=False),
-                                "lng":fields.Float(description="longitude",required=False)
                             })
 
     def item_list_response_format(self):

@@ -1,5 +1,5 @@
 from random import *
-from Server.DataAccessObject import File, Item
+from ItemAPI.DataAccessObject import File, Item
 
 def make_items():
     f = File()
@@ -13,7 +13,9 @@ def make_items():
     lngs = sample(range(20,200),len(names))
 
     for i in range(len(names)):
-            Item(Accessor=f,name=names[i],description=descriptions[i],ingredients=ingredients[i],price=prices[i],seller=sellerid[i],item_id=itemid[i],state='CA',city='Irvine',lat=lats[i],lng=lngs[i]).store()
+            item = Item(Accessor=f,name=names[i],description=descriptions[i],ingredients=ingredients[i],price=prices[i],seller=sellerid[i],item_id=itemid[i],state='CA',city='Irvine',lat=lats[i],lng=lngs[i])
+            print(item)
+
 
 if __name__ == '__main__':
     make_items()
