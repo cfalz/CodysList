@@ -1,5 +1,4 @@
 import React from 'react'
-import {Header} from '../'
 
 class Home extends React.Component {
 
@@ -7,7 +6,7 @@ class Home extends React.Component {
     {
         return(
             <div>
-                <Header />
+               <h1> Home </h1>
             </div>
         );
     }
