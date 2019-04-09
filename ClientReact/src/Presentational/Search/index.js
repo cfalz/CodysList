@@ -1,5 +1,5 @@
-import Location from './Location'
+import DropDown from './DropDown'
 
 export {
-  Location,
+  DropDown,
 }

@@ -1,22 +1,22 @@
 import React, {Component} from 'react'
-import {LocationForm} from './SearchForm'
+import {LocationForm, AuctionCategoryForm, ContactInformationForm} from './SearchForm'
 
 
 class Search extends Component {
-  render() {
-    return (
+    render() {
+        return (
         <div>
-            <div>
-                <h1> Search For Auction </h1>
-                <body>
-                    <div>
-                        { < LocationForm /> }
-                    </div>
-                </body>
-            </div>
+            <h1> Search For Auction </h1>
+            <body>
+                <div>
+                    { < LocationForm /> }
+                    { < AuctionCategoryForm /> }
+                    { < ContactInformationForm /> }
+                </div>
+            </body>
         </div>
-    )
-  }
+        )
+    }
 }
 
 export default Search;
